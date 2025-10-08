@@ -16,7 +16,7 @@ return [
     |                     `#[Route(method: 'POST')]` attribute.
     |
     */
-    'convention' => 'prefix',
+    'convention' => 'attribute_or_get',
 
     /*
     |--------------------------------------------------------------------------
