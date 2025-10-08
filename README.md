@@ -27,7 +27,7 @@ php artisan vendor:publish --provider="Poshtive\Router\RouterServiceProvider" --
 
 After publishing, optionally edit `config/router.php`. Below are the available options.
 
-### 1. convention (string)
+### `convention` (string)
 
 Controls how controller methods become routes. Default is `attribute_or_get`.
 
@@ -60,7 +60,7 @@ Controls how controller methods become routes. Default is `attribute_or_get`.
   }
   ```
 
-### 2. method_extends (bool)
+### `method_extends` (bool)
 
 Include methods inherited from parent classes. Default is `false`.
 
@@ -84,7 +84,7 @@ class UserController extends BaseCrudController {
 
 With `method_extends` = `true` both `index` and `show` register as `UserController` methods.
 
-### 3. http_methods_map (array)
+### `http_methods_map` (array)
 
 Available only when `convention` = `attribute_or_get`.
 
@@ -148,6 +148,45 @@ In general, the route path is constructed as follows:
 With some exception, see [Parameter Order](#parameter-order) and [Child Controllers](#child-controllers).
 
 Only `public` methods are considered. Methods inherited from parent classes are included only if `method_extends` is set to `true` in the configuration. All other methods are ignored.
+
+## Index Controller and Method
+
+Controller named `IndexController` will have its name omitted from the route path. Also, method named `index` will have its name omitted from the route path.
+
+Example:
+
+```php
+namespace App\Http\Controllers;
+
+class IndexController {
+    public function index() {}
+    public function about() {}
+}
+```
+
+Resulting route: `GET /` and `GET /about`.
+
+```php
+namespace App\Http\Controllers;
+
+class UserController {
+    public function index() {}
+    public function show() {}
+}
+```
+
+Resulting route: `GET /user` and `GET /user/show`.
+
+```php
+namespace App\Http\Controllers\Admin;
+
+class IndexController {
+    public function index() {}
+    public function dashboard() {}
+}
+```
+
+Resulting route: `GET /admin` and `GET /admin/dashboard`. And so on.
 
 ## Parameter / Model Binding
 
