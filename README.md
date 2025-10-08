@@ -39,7 +39,7 @@ Controls how controller methods become routes. Default is `attribute_or_get`.
   use Poshtive\Router\Attributes\Route;
 
   class UserController {
-      public function index() {}            // GET /user/index
+      public function index() {}            // GET /user
 
       #[Route(method: 'POST')]
       public function store() {}            // POST /user/store
@@ -308,7 +308,7 @@ class UserController {
 }
 ```
 
-Means `GET /user/index` is only registered in local environment.
+Means `GET /user` is only registered in local environment.
 
 ### DoNotDiscover
 
@@ -344,7 +344,7 @@ class UserController extends AuthenticatedConcerns {
 }
 ```
 
-Means `GET /user/index` will be registered with `auth` middleware even though `AuthenticatedConcerns` itself is marked as `DoNotDiscover`.
+Means `GET /user` will be registered with `auth` middleware even though `AuthenticatedConcerns` itself is marked as `DoNotDiscover`.
 
 ### Where
 
@@ -388,7 +388,7 @@ class UserController extends AuthenticatedConcerns {
 }
 ```
 
-Means `GET /user/index` will be registered without any middleware from `AuthenticatedConcerns` if any.
+Means `GET /user` will be registered without any middleware from `AuthenticatedConcerns` if any.
 
 ```php
 use Poshtive\Router\Attributes\IgnoreParentMiddleware;
@@ -406,3 +406,11 @@ class UserController extends AuthenticatedConcerns {
 ```
 
 Means `GET /user/show` will be registered without any middleware from `AuthenticatedConcerns`. But, `GET /user/app` will still have the `auth` middleware.
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit issues or pull requests.
+
+## Licensing
+
+This package is open-sourced software licensed under the [MIT license](LICENSE).
